@@ -3,6 +3,36 @@ import pandas as pd
 import DataStructure as ds
 import json
 
+def simple_random_walk_sampling(G, start_node, num_steps):
+    """
+    Perform a random walk on the graph and return the subgraph induced by the visited nodes
+
+    Parameters
+    ----------
+    G : nx.Graph
+        Graph to sample from
+    start_node : int
+        Node to start the random walk from
+    num_steps : int
+        Number of steps to take
+
+    Returns
+    -------
+    nx.Graph
+        Subgraph induced by the visited nodes
+    """
+    current_node = start_node
+    visited_nodes = set([current_node])
+
+    for _ in range(num_steps):
+        neighbors = list(G.neighbors(current_node))
+        if not neighbors:
+            break
+        current_node = random.choice(neighbors)
+        visited_nodes.add(current_node)
+
+    return G.subgraph(visited_nodes)
+
 def reweighted_random_walk_sampling(G, start_node, num_steps):
     """
     Perform a random walk on the graph and return the subgraph induced by the visited nodes
@@ -83,7 +113,7 @@ if __name__ == "__main__":
     raw_G = ds.load_data('./raw_data/musae_git_edges.csv', './raw_data/musae_git_target.csv', './raw_data/musae_git_features.json')
 
     start_node = random.choice(list(raw_G.nodes()))
-    sampled_G = reweighted_random_walk_sampling(raw_G, start_node, 1000)
+    sampled_G = simple_random_walk_sampling(raw_G, start_node, 3000)
 
     save_edges(sampled_G, './sampled_data/sampled_edges.csv')
     save_targets(sampled_G, './sampled_data/sampled_targets.csv')
