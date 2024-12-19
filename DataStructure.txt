@@ -1,0 +1,33 @@
+Github Social Network Analysis Project
+
+Description:
+This project involves analyzing a large social network of GitHub developers. The data was collected from the public API in June 2019. Nodes represent developers who have starred at least 10 repositories, and edges represent mutual follower relationships between them. The vertex features are extracted based on the location, repositories starred, employer, and e-mail address.
+
+Data source:
+https://snap.stanford.edu/data/github-social.html
+
+Properties:
+- Directed: No
+- Node features: Yes
+- Edge features: No
+- Node labels: Yes (Binary-labeled)
+- Temporal: No
+- Nodes: 37,700
+- Edges: 289,003
+- Density: 0.001
+- Transitivity: 0.013
+
+Files:
+- raw_data/musae_git_edges.csv: Contains the edges of the graph
+- raw_data/musae_git_target.csv: Contains the target labels for the nodes
+- raw_data/musae_git_features.json: Contains the features for the nodes
+
+Scripts:
+- DataStructure.py: Contains functions to load edges, targets, features, and construct the graph
+- DataSampling.py: Contains functions for sampling the graph and saving the sampled data
+
+Possible Tasks:
+- Binary node classification
+- Link prediction
+- Community detection
+- Network visualization
