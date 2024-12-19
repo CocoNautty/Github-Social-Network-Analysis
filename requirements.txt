@@ -1,0 +1,8 @@
+dash==2.18.2
+dash_bootstrap_components==1.6.0
+matplotlib==3.10.0
+networkx==3.4
+numpy==2.2.0
+pandas==2.2.3
+plotly==5.24.0
+python_louvain==0.16

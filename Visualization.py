@@ -1,7 +1,8 @@
 import plotly.graph_objects as go
+import matplotlib.colors as mcolors
 import networkx as nx
 
-def create_network_figure(G, pos):
+def create_network_figure(G, pos, partition):
     edge_x = []
     edge_y = []
     for edge in G.edges():
@@ -48,6 +49,12 @@ def create_network_figure(G, pos):
             ),
             line_width=2))
 
+    node_line_color = []
+    for node, community in partition.items():
+        node_line_color.append(mcolors.CSS4_COLORS[list(mcolors.CSS4_COLORS.keys())[community % len(mcolors.CSS4_COLORS)]])
+
+    node_trace.marker.line.color = node_line_color
+
     node_adjacencies = []
     for node, adjacencies in enumerate(G.adjacency()):
         node_adjacencies.append(len(adjacencies[1]))
@@ -69,3 +76,4 @@ def create_network_figure(G, pos):
                     yaxis=dict(showgrid=False, zeroline=False))
                     )
     return fig
+    
